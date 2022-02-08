@@ -1,26 +1,13 @@
-terraform {
-  required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = ">= 2.13.0"
-    }
-  }
+data "aws_ssm_parameter" "ami" {
+  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
+resource "aws_instance" "app_server" {
+    ami           = nonsensitive(data.aws_ssm_parameter.ami.value)
+    instance_type = var.instance_type
+    vpc_security_group_ids = ["sg-02d65af4d09b6f2bb"]
+    subnet_id = "subnet-084653feaa46384dd"
 
-provider "docker" {
-  host    = "npipe:////./pipe/docker_engine"
-}
-
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
-  keep_locally = false
-}
-
-resource "docker_container" "nginx" {
-  image = docker_image.nginx.latest
-  name  = "tutorial"
-  ports {
-    internal = 80
-    external = 8000
+  tags = {
+    Name = "ExampleAppServerInstance"
   }
 }
