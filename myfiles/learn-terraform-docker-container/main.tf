@@ -11,3 +11,19 @@ resource "aws_instance" "app_server" {
     Name = "ExampleAppServerInstance"
   }
 }
+
+resource "aws_instance" "example_a" {
+  ami           = data.aws_ssm_parameter.ami.value
+  instance_type = var.instance_type
+}
+
+resource "aws_instance" "example_b" {
+  ami           = data.aws_ssm_parameter.ami.value
+  instance_type = var.instance_type
+}
+
+resource "aws_eip" "ip" {
+    vpc = true
+    instance = aws_instance.example_a.id
+}
+

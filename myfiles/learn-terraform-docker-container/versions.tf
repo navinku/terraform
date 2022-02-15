@@ -17,5 +17,5 @@ terraform {
 
 provider "aws" {
   profile = "deep-dive"
-  region  = "us-east-1"
+  region  = var.aws_region
 }
