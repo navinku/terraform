@@ -1,10 +1,10 @@
 terraform {
   cloud {
-  organization = "navinku-org"
-  workspaces {
-    name = "API-workspace"
+    organization = "navinku-org"
+    workspaces {
+      name = "API-workspace"
+    }
   }
-}
   required_providers {
     aws = {
       source  = "hashicorp/aws"

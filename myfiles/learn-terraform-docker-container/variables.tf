@@ -12,8 +12,8 @@ variable "aws_region" {
 
 variable "vpc_cidr_block" {
   description = "CIDR block for VPC"
-  type = string
-  default = "10.0.0.0/16"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "instance_count" {
@@ -28,16 +28,10 @@ variable "enable_vpn_gateway" {
   default     = false
 }
 
-variable "public_subnet_count" {
-  description = "Number of public subnets."
-  type        = number
-  default     = 2
-}
-
 variable "public_subnet_cidr_blocks" {
   description = "Available cidr blocks for public subnets."
   type        = list(string)
-  default     = [
+  default = [
     "10.0.1.0/24",
     "10.0.2.0/24",
     "10.0.3.0/24",
@@ -58,7 +52,7 @@ variable "private_subnet_count" {
 variable "private_subnet_cidr_blocks" {
   description = "Available cidr blocks for private subnets."
   type        = list(string)
-  default     = [
+  default = [
     "10.0.101.0/24",
     "10.0.102.0/24",
     "10.0.103.0/24",
@@ -73,8 +67,9 @@ variable "private_subnet_cidr_blocks" {
 variable "resource_tags" {
   description = "Tags to set for all resources"
   type        = map(string)
-  default     = {
+  default = {
     project     = "project-alpha",
     environment = "dev"
   }
 }
+
